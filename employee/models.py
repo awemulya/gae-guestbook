@@ -6,7 +6,7 @@ class Role(ndb.Model):
 
 
 class Employee(ndb.Model):
-  name = ndb.StringProperty(indexed=False)
+  name = ndb.StringProperty()
   role = ndb.StructuredProperty(Role)
   hire_date = ndb.DateProperty(indexed=False)
   new_hire_training_completed = ndb.BooleanProperty(indexed=False)
@@ -17,7 +17,7 @@ class Employee(ndb.Model):
 class SalaryHistory(ndb.Model):
     employee = ndb.StructuredProperty(Employee)
     salary = ndb.FloatProperty()
-    date = ndb.DateProperty()
+    date = ndb.DateProperty(auto_now_add=True)
 
 class SalarySheet(ndb.Model):
     employee = ndb.StructuredProperty(Employee)

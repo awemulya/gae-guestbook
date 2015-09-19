@@ -53,7 +53,7 @@ class EmployeePage(webapp2.RequestHandler):
         employe.new_hire_training_completed = True
         employe.put()
 
-        employee_query = Employee.query()
+        employee_query = Employee().query()
         employees = employee_query.fetch(10)
 
         role_query = Role.query()
@@ -82,8 +82,8 @@ class EmployeePage(webapp2.RequestHandler):
 class SalaryPage(webapp2.RequestHandler):
 
     def get(self, employee_id):
-        # employee_id = self.request.get('employee_id')
-        salary_query = SalaryHistory(employee = Employee(id=employee_id)).query()
+        employee_id = self.request.get('employee_id')
+        salary_query = SalaryHistory().query(SalaryHistory.employee.name=='rrrr')
         salaries = salary_query.fetch()
 
         user = users.get_current_user()
@@ -97,7 +97,7 @@ class SalaryPage(webapp2.RequestHandler):
         template_values = {
             'user': user,
             'salaries': salaries,
-            'employee_id':  Employee(id=employee_id).to_dict(),
+            'employee_id': employee_id,
             'url': url,
             'url_linktext': url_linktext,
         }
@@ -131,7 +131,7 @@ class SalaryPage(webapp2.RequestHandler):
         template_values = {
             'user': user,
             'salaries': salaries,
-            'employee_id': dir(emp),
+            'employee_id': Employee.get_or_insert(name='rrrr'),
             'url': url,
             'url_linktext': url_linktext,
         }
