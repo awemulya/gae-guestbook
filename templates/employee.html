@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+  <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+{% autoescape true %}
+<html>
+  <body>
+    {% for e in employees %}
+      <div>name:{{ e.name }}</div>
+      <div>salary:{{ e.salary }}<a href="/salary/{{e.key.id()}}/">Update</a> </div>
+      <div>role: {{ e.role.role }}</div><br>
+    {% endfor %}
+
+    {% for r in roles %}
+      <div>role:{{ r.role }}</div>
+    {% endfor %}
+
+    <form action="/employee" method="post">
+      <div>name</div>
+      <div><input type="text" name="name"> </div><br>
+        <div>Salary</div>
+      <div><input type="number" step="any" name="salary"> </div><br>
+     <div>email</div>
+      <div><input type="text" name="email"> </div><br>
+     <div>traning</div>
+      <div><input type="checkbox" name="new_hire_training_completed" value="first_checkbox"> Has training </div><br>
+     <div>role</div>
+      <div><select name="role">
+          <option value="executive">executive</option>
+          <option value="manager">Manager</option>
+          <option value="producer">producer</option>
+      </select></div><br>
+     <div>Date</div>
+      <div><input type="text" name="hire_date"> </div><br>
+      <div><input type="submit" value="Save"></div>
+</form>
+
+    <hr>
+    <a href="{{ url|safe }}">{{ url_linktext }}</a>
+
+  </body>
+</html>
+{% endautoescape %}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+{% autoescape true %}
+<html>
+  <body>
+  {{employee_id }}
+    {% for s in salaries %}
+      <div>name:{{ s.employee }}</div>
+      <div>salary:{{ s.salary }} </div>
+      <div>date: {{ s.date }}</div><br>
+    {% endfor %}
+
+    <form action="/salary/{{employee_id}}/" method="post">
+      <div>salary</div>
+      <div><input type="text" name="salary"> </div><br>
+        <div>Salary</div>
+
+     <div>Date</div>
+      <div><input type="text" name="date"> </div><br>
+      <div><input type="submit" value="Save"></div>
+</form>
+
+    <hr>
+    <a href="{{ url|safe }}">{{ url_linktext }}</a>
+
+  </body>
+</html>
+{% endautoescape %}
